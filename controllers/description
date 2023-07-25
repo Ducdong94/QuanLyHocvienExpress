@@ -1,0 +1,3 @@
+Controller sẽ là phần xử lý tất cả các logic yêu cầu đến ứng dụng
+Phản hồi về 1 trang giao diện 
+hoặc xử lý các hành động liên quan đến API (GET, POST, PUT, DELETE, ..) sau đó gửi trả về nội dung JSON

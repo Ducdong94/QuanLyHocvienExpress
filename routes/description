@@ -1,0 +1,7 @@
+Định tuyến các request đến ứng dụng.
+Tạo được nhiều tệp định tuyến để có thể mở rộng và dễ quản lý hơn
+Các route được phân thành 4 loại chính:
+1. Website Routes (render)
+2. API Routes (Dịnh tuyến các api)
+3. Authentication Routes (Định tuyến các request liên quan đến xác thực người dùng)
+4. Documentation Routes (Định tuyến các request liên quan đến tài liệu, file)
