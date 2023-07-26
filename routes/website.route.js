@@ -1,9 +1,14 @@
 var express = require('express');
+const RenderController = require('../controllers/render.controller');
 var router = express.Router();
 
-/* GET home page. */
-router.get('/', function(req, res, next) {
-  res.render('index', { title: 'Express' });
-});
+router.get('/', RenderController.home);
+router.get('/students', RenderController.litsStudent);
+router.get('/students/find', RenderController.findStudent);
+router.get('/students/create', RenderController.createStudent);
+router.get('/students/edit', RenderController.editStudent);
+router.get('/students/delete', RenderController.deleteStudent);
+
+// router.get('/error', RenderController.error);
 
 module.exports = router;

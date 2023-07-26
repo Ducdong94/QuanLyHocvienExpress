@@ -1,9 +1,10 @@
+const { ResponseCode, ResponseMessage } = require("../constans/response_code");
 const BaseRessponse = require("../interfaces/response.interface");
 const HocVien = require("../models/hocvien.model");
 
 const HocVienController = {
     getAllStudent: async function (req, res, next) {
-        res.json((new BaseRessponse('SUCCESSFUL', 'SUCCESSFUL', await HocVien.find())));
+        res.json((new BaseRessponse(ResponseCode.SUCCESSFUL, ResponseMessage.SUCCESSFUL, await HocVien.find())));
     },
     addStudent: async function (req, res, next) {
         let body = req.body;
@@ -19,7 +20,7 @@ const HocVienController = {
         });
 
         let data = await hv.save();
-        res.status(201).json(new BaseRessponse('SUCCESSFUL', 'SUCCESSFUL', data));
+        res.status(201).json(new BaseRessponse(ResponseCode.SUCCESSFUL, ResponseMessage.SUCCESSFUL, data));
     },
     editStudent: async function (req, res, next) {
         // lấy parameters: req.query 
@@ -37,12 +38,12 @@ const HocVienController = {
             updatedBy: ''
         };
         await HocVien.updateOne({ _id: param.id }, { $set: hv });
-        res.json(new BaseRessponse('SUCCESSFUL', 'SUCCESSFUL', hv));
+        res.json(new BaseRessponse(ResponseCode.SUCCESSFUL, ResponseMessage.SUCCESSFUL, hv));
     },
     deleteStudent: async function (req, res, next) {
         let id = req.query.id;
         await HocVien.deleteOne({ _id: id });
-        res.json(new BaseRessponse('SUCCESSFUL', 'SUCCESSFUL'));
+        res.json(new BaseRessponse(ResponseCode.SUCCESSFUL, ResponseMessage.SUCCESSFUL));
     }
 }
 
