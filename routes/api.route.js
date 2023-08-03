@@ -2,6 +2,8 @@ var express = require('express');
 const HocVienController = require('../controllers/hocvien.controller');
 const { checkIdHocVien } = require('../middlewares/checkIdHocVien.middleware');
 const ErrorController = require('../controllers/errors.controller');
+const AuthController = require('../controllers/auth.controller');
+const restrictTo = require('../middlewares/auth.middleware');
 var router = express.Router();
 
 // Router-level Middleware
@@ -13,20 +15,13 @@ router.param('uid', (req, res, next) => {
 
 /* Student management */
 router.route('/students')
-  .get(HocVienController.getAllStudent)
+  .get([AuthController.restrictTo('admin', 'editor'), HocVienController.getAllStudent])
   .post(HocVienController.addStudent)
   .put([checkIdHocVien, HocVienController.editStudent])
   .delete([checkIdHocVien, HocVienController.deleteStudent]);
 
-router.get("/students/:uid", (req, res) => {
-  console.log("Then this function will be called - students");
-  res.end();
-});
-router.get("/hocvien/:uid", (req, res) => {
-  console.log("Then this function will be called - hocvien");
-  res.end();
-});
-
+router.route('/auth/signup').post(AuthController.signUp);
+router.route('/auth/signin').post(AuthController.signIn);
 
 
 router.route('*').all(ErrorController.pathNotFound);

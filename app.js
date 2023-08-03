@@ -7,6 +7,7 @@ var logger = require('morgan');
 var websiteRouter = require('./routes/website.route');
 var apiRouter = require('./routes/api.route');
 const { logRequestTime } = require('./middlewares/request-time.middleware');
+const { protecting } = require('./middlewares/auth.middleware');
 
 var app = express();
 
@@ -22,6 +23,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 // init application-level middleware 
 app.use(logRequestTime);
+app.use(protecting);
 
 // init router
 app.use('/', websiteRouter);

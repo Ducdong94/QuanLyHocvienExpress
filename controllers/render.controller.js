@@ -6,7 +6,7 @@ const RenderController = {
             res.render(Constan.viewVersion + '/index');
         } catch (error) {
             console.log(error);
-            
+
         }
     },
     litsStudent: (req, res, next) => {
@@ -31,6 +31,20 @@ const RenderController = {
     },
     deleteStudent: (req, res, next) => {
 
+    },
+    signUp: (req, res, next) => {
+        try {
+            res.render(Constan.viewVersion + '/auth/signUp');
+        } catch (error) {
+            console.log(error);
+        }
+    },
+    signIn: (req, res, next) => {
+        try {
+            res.render(Constan.viewVersion + '/auth/signIn');
+        } catch (error) {
+            console.log(error);
+        }
     },
     error: (req, res, next) => {
         // res.render('error', { title: 'Express today' });

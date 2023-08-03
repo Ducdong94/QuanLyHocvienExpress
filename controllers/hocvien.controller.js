@@ -4,7 +4,11 @@ const HocVien = require("../models/hocvien.model");
 
 const HocVienController = {
     getAllStudent: async function (req, res, next) {
-        res.json((new BaseRessponse(ResponseCode.SUCCESSFUL, ResponseMessage.SUCCESSFUL, await HocVien.find())));
+        try {
+            res.json((new BaseRessponse(ResponseCode.SUCCESSFUL, ResponseMessage.SUCCESSFUL, await HocVien.find())));
+        } catch (e) {
+            console.log(e);
+        }
     },
     addStudent: async function (req, res, next) {
         let body = req.body;

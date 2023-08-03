@@ -9,6 +9,9 @@ router.get('/students/create', RenderController.createStudent);
 router.get('/students/edit', RenderController.editStudent);
 router.get('/students/delete', RenderController.deleteStudent);
 
+router.get('/signup', RenderController.signUp);
+router.get('/signin', RenderController.signIn);
+
 // router.get('/error', RenderController.error);
 
 module.exports = router;
