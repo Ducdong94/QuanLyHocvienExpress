@@ -6,6 +6,7 @@ const ResponseCode = {
     USER_NOT_EXISTED: 'USER_NOT_EXISTED',
     UNAUTHORIZED: 'UNAUTHORIZED',
     FORBIDDEN: 'FORBIDDEN',
+    SEND_EMAIL_ERROR: 'SEND_EMAIL_ERROR',
     INTERNAL_SERVER_ERROR: 'INTERNAL_SERVER_ERROR',
 }
 
@@ -17,6 +18,7 @@ const ResponseMessage = {
     USER_NOT_EXISTED: 'Thông tin người dùng không tồn tại',
     UNAUTHORIZED: 'Mật khẩu không hợp lệ',
     FORBIDDEN: 'Bạn không có quyền truy cập',
+    SEND_EMAIL_ERROR: 'Gửi email thất bại',
     INTERNAL_SERVER_ERROR: 'Đã có lỗi xảy ra vui lòng thử lại!',
 }
 

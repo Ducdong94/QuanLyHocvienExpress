@@ -46,6 +46,13 @@ const RenderController = {
             console.log(error);
         }
     },
+    contact: (req, res, next) => {
+        try {
+            res.render(Constan.viewVersion + '/pages/contacts');
+        } catch (error) {
+            console.log(error);
+        }
+    },
     error: (req, res, next) => {
         // res.render('error', { title: 'Express today' });
     },

@@ -1,50 +1,42 @@
 $(function () {
     // Cấu trúc của JQuery: đợi cho đến khi trang load xong thì mới chạy
-    AUTH.bindingEvent();
+    CONTACT.bindingEvent();
 });
 
-const AUTH = {
+const CONTACT = {
     bindingEvent: () => {
-
-        $('#btn-register-submit').unbind();
-        $('#btn-register-submit').click(function (e) {
-            AUTH.action.signUp();
-        });
-
-        $('#btn-login-submit').unbind();
-        $('#btn-login-submit').click(function (e) {
-            AUTH.action.signIn();
+        $('#btn-send').unbind();
+        $('#btn-send').click(function (e) {
+            CONTACT.action.send();
         });
     },
     action: {
-        signUp: () => {
-            // username
-            let username = $('#username').val();
-            // password
-            let password = $('#password').val();
-            // repassword
-            let repassword = $('#repassword').val();
-            // email
-            let email = $('#email').val();
-            // phone
+        send: () => {
+            let fullname = $('#fullname').val();
             let phone = $('#phone').val();
-
+            let email = $('#email').val();
+            let address = $('#address').val();
+            let title = $('#title').val();
+            let content = $('#content').val();
             // Validate input data
 
             // Call api
-            let url = 'http://localhost:8080/v1/api/auth/signup';
+            let url = 'http://localhost:8080/v1/api/sendEmail';
             fetch(
                 url,
                 {
                     method: 'POST',
                     headers: {
-                        'Content-Type': 'application/json'
+                        'Content-Type': 'application/json',
+                        'Authorization': 'Bearer ' + localStorage.getItem('acess_token')
                     },
                     body: JSON.stringify({
-                        username,
-                        password,
+                        fullname,
+                        phone,
                         email,
-                        phone
+                        address,
+                        title,
+                        content
                     })
                 }
             ).then((res) => {
@@ -93,7 +85,7 @@ const AUTH = {
                 let responseBody = await res.json();
                 let token = responseBody.data.token;
                 // lưu token vào local storage
-                localStorage.setItem('acess_token', token);
+                localStorage.setItem('token', token);
                 Toastify({
                     text: 'Đăng nhập thành công',
                     duration: 2000

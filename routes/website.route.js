@@ -12,6 +12,9 @@ router.get('/students/delete', RenderController.deleteStudent);
 router.get('/signup', RenderController.signUp);
 router.get('/signin', RenderController.signIn);
 
+router.get('/contact', RenderController.contact);
+
+
 // router.get('/error', RenderController.error);
 
 module.exports = router;

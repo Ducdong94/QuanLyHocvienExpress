@@ -7,7 +7,7 @@ exports.protecting = async (req, res, next) => {
     try {
         // skip check với signin và signup
         console.log(req.path)
-        if (req.path.endsWith('signin') || req.path.endsWith('signup')) {
+        if (!req.path.includes('/v1/api') ||  req.path.endsWith('signin') || req.path.endsWith('signup')) {
             next();
             return;
         }
@@ -20,6 +20,7 @@ exports.protecting = async (req, res, next) => {
             token = auth.replace('Bearer ', '');
         }
         if (!token) {
+            console.log('Token null');
             return res.status(403).json(new BaseRessponse(ResponseCode.FORBIDDEN, ResponseMessage.FORBIDDEN))
         }
         // 2. Verify token
@@ -38,10 +39,12 @@ exports.protecting = async (req, res, next) => {
         // 3. Kiểm tra user còn tồn tại hay không
         let user = await User.findOne({ username: decoded.username });
         if (!user) {
+            console.log('User not exist');
             return res.status(403).json(new BaseRessponse(ResponseCode.FORBIDDEN, ResponseMessage.FORBIDDEN))
         }
         // 3.1 user có đang active hay không
         if (!user.status) {
+            console.log('User incativated');
             return res.status(403).json(new BaseRessponse(ResponseCode.FORBIDDEN, ResponseMessage.FORBIDDEN))
         }
 
@@ -50,6 +53,7 @@ exports.protecting = async (req, res, next) => {
         console.log(pwdInDb);
         console.log(user.password);
         if (pwdInDb !== user.password) {
+            console.log('User changed password');
             return res.status(403).json(new BaseRessponse(ResponseCode.FORBIDDEN, ResponseMessage.FORBIDDEN))
         }
         req.user = user;

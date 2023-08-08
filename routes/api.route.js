@@ -4,6 +4,7 @@ const { checkIdHocVien } = require('../middlewares/checkIdHocVien.middleware');
 const ErrorController = require('../controllers/errors.controller');
 const AuthController = require('../controllers/auth.controller');
 const restrictTo = require('../middlewares/auth.middleware');
+const EmailController = require('../controllers/email.controller');
 var router = express.Router();
 
 // Router-level Middleware
@@ -23,6 +24,7 @@ router.route('/students')
 router.route('/auth/signup').post(AuthController.signUp);
 router.route('/auth/signin').post(AuthController.signIn);
 
+router.route('/sendEmail').post(EmailController.send);
 
 router.route('*').all(ErrorController.pathNotFound);
 
